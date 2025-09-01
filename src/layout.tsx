@@ -1,10 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-export default function AppsLayout({
-  sidebarCollapsed,
-}: {
-  sidebarCollapsed: boolean;
-}) {
+export default function AppsLayout() {
   return (
     <main
       className={`flex-1 transition-all w-full h-screen duration-300 scale-[1.1] overflow-auto`}

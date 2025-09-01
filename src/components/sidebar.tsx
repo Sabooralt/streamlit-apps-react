@@ -1,10 +1,10 @@
 "use client"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, X, Home, Layers, BarChart3, Database, Settings } from "lucide-react"
+import { Menu, X, Home,  BarChart3, Settings } from "lucide-react"
 
 interface SidebarProps {
   collapsed: boolean
-  onToggle: () => void
+  
 }
 
 const applications = [
@@ -17,7 +17,7 @@ const applications = [
   
 ]
 
-export default function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export default function Sidebar({ collapsed }: SidebarProps) {
   const location = useLocation()
 
   return (

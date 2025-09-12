@@ -1,44 +1,36 @@
 "use client";
 
+import type React from "react";
+import { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Sidebar from "./components/sidebar";
-import PitchAnalysis from "./pages/pitch-analysis";
-import Home from "./pages/home";
-import AppsLayout from "./layout";
+import Layout from "./components/Layout";
+import PitcherListDashboard from "./pages/PitcherListDashboard";
+import { AppViewerSkeleton } from "./components/LoadingStates";
+import { NoApplicationsSelected } from "./components/EmptyState";
+import ErrorBoundary from "./components/ErrorBoundary";
 
-export default function App() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setSidebarCollapsed(true);
-      }
-    };
-
-    // Set initial state based on screen size
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+const App: React.FC = () => {
   return (
     <Router>
-      <div className="flex h-screen overflow-hidden bg-[#0E1117]">
-        <Sidebar collapsed={sidebarCollapsed} />
-        <div
-          className={`w-full h-screen ${sidebarCollapsed ? "ml-10" : "ml-57"}`}
-        >
+      <Layout>
+        <Suspense fallback={<AppViewerSkeleton />}>
           <Routes>
-            <Route path="/" index element={<Home />} />
-            <Route path="/apps" element={<AppsLayout />}>
-              <Route element={<PitchAnalysis />} path="/apps/pitch-analysis" />
-            </Route>
+            <Route path="/" element={<NoApplicationsSelected />} />
+            <Route
+              path="/apps/pitcher-dashboard"
+              element={
+                <ErrorBoundary fallbackMessage="Failed to load PitcherList dashboard">
+                  <PitcherListDashboard />
+                </ErrorBoundary>
+              }
+            />
+            <Route path="*" element={<NoApplicationsSelected />} />
+            {/* Generic app viewer */}
           </Routes>
-        </div>
-      </div>
+        </Suspense>
+      </Layout>
     </Router>
   );
-}
+};
+
+export default App;

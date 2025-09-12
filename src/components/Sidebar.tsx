@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -23,7 +21,7 @@ interface ExpandedSections {
   applications: boolean;
 }
 
-export function Sidebar2({ className }: SidebarProps) {
+export default function Sidebar({ className }: SidebarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
@@ -76,7 +74,6 @@ export function Sidebar2({ className }: SidebarProps) {
             size="sm"
             onClick={() => {
               setIsOpen(false);
-              navigate("/");
             }}
             className="text-sidebar-foreground hover:bg-sidebar-accent"
           >

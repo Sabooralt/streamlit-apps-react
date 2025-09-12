@@ -1,4 +1,3 @@
-"use client";
 
 import type React from "react";
 import { Suspense } from "react";
@@ -25,7 +24,6 @@ const App: React.FC = () => {
               }
             />
             <Route path="*" element={<NoApplicationsSelected />} />
-            {/* Generic app viewer */}
           </Routes>
         </Suspense>
       </Layout>

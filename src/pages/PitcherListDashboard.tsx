@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { Button } from "../components/ui/button";
 import {
@@ -55,7 +53,7 @@ const PitcherListDashboard = () => {
     /**
      * Later you can replace this timeout with an API call:
      * try {
-     *   const res = await fetch("/api/generate-viz");
+     *   const res = await axios.post("/api/generate-viz",formData);
      *   const data = await res.json();
      *   // set image/data from response
      *   setShowImage(true);
